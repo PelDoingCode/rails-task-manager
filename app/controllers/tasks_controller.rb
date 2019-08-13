@@ -22,7 +22,11 @@ class TasksController < ApplicationController
   end
 
   def update
-    @tasks.update(params[:task])
+    # attention faut passer le task_parems il connaitt
+    # -----------------------
+    # @tasks.update(params[:task])
+    @tasks.update(task_params)
+    redirect_to tasks_path
   end
 
   def destroy
