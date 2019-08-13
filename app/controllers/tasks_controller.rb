@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
+  before_action :find_task, only: [ :show, :edit, :update, :destroy ]
 
 def show
-  @tasks = Task.find(params[:id])
 end
 
 def index
@@ -23,12 +23,12 @@ end
 
 
 def update
-end
-
-def delete
+  @tasks.update(params[:task])
 end
 
 def destroy
+  @tasks.destroy
+  redirect_to tasks_path
 end
 
 private
@@ -36,6 +36,10 @@ private
 
 def task_params
   params.require(:task).permit(:title, :details, :completed)
+end
+
+def find_task
+  @tasks = Task.find(params[:id])
 end
 
 
